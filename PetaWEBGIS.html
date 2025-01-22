@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUMLAH PEROLEHAN SUARA PILKADA KOTA PALOPO 2024</title>
+  <link rel="icon" type="image/jpg" href="503px-Lambang_Kota_Palopo.png">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link ke file CSS -->
+<link rel="stylesheet" href="palopo.CSS">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Dashboard Hasil PILKADA Kota Palopo 2024</div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul class="menu">
+            <li><a href="https://pilkada2024.kpu.go.id/pilwalkot/sulawesi-selatan/kota-palopo">Data real KPU</a></li>
+            <li><a href="https://muhammadazril20k.github.io/Mukapeta-/">Peta Secara Luas</a></li>
+            <li><a href="https://www.instagram.com/geoscience.id_/">Kontak</a></li>
+        </ul>
+        </nav>
+        <!-- Main Content -->
+        <div class="container mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Peta -->
+            <div class="bg-white p-4 shadow rounded">
+              <h2 class="text-lg font-semibold mb-4">Peta Interaktif</h2>
+              <iframe src="https://muhammadazril20k.github.io/Mukapeta-/" class="w-full h-80 border rounded" allowfullscreen></iframe>
+            </div>
+        <!-- Diagram -->
+    <div class="bg-white p-4 shadow rounded">
+        <h2 class="text-lg font-semibold mb-4">Diagram Infografis</h2>
+        <!-- <canvas id="chart" class="w-full h-80"></canvas> -->
+        <!-- <h2 style="text-align: center;">Total Suara Paslon per Kecamatan</h2> -->
+        <canvas id="stackedBarChart" width="800" height="400"></canvas>
+    </div>
+
+    <script>
+        // Labels untuk sumbu X (Kabupaten/Kota)
+        const labels = ["Wara","Wara Utara","Wara Selatan","Telluwanua","Wara Timur", "Wara Barat", "Sendana", "Mungkajang", "Bara"]
+    
+        // Data suara Pasangan Calon Walikota Palopo Per Kecamatan 
+        const dataPartai = {
+            "Putri Dakka, S.H - Drs. H. Haidir Basir, M.M": [1407, 798, 636, 984, 1697, 621, 338, 259, 989],
+            "Dr. H. Farid Kasim - Dr. Hj. Nurhaenih, M.Si": [5350, 3490, 3782, 2950, 6781, 2333, 1697, 1575, 5380],
+            "Ir. H. Rahmat Masri Bandaso, M.Si - Hj. Andi Tenri Karta, S.AN": [3949, 2478, 2020, 977, 3824, 1304, 693, 1459, 2780],
+            "Trisal Tahir - Dr. Akhmad Syarifuddin, S.E., M.Si": [3832, 3742, 3431, 3582, 7557, 1786, 1615, 2052, 6336],
+        };
+    
+        // Warna khusus untuk setiap partai
+        const partaiColors = {
+            "Putri Dakka, S.H - Drs. H. Haidir Basir, M.M": "red",
+            "Dr. H. Farid Kasim - Dr. Hj. Nurhaenih, M.Si": "orange",
+            "Ir. H. Rahmat Masri Bandaso, M.Si - Hj. Andi Tenri Karta, S.AN": "yellow",
+            "Trisal Tahir - Dr. Akhmad Syarifuddin, S.E., M.Si": "skyblue",
+
+        };
+    
+        // Menyiapkan dataset
+        const datasets = Object.keys(dataPartai).map(partai => ({
+            label: partai,
+            data: dataPartai[partai],
+            backgroundColor: partaiColors[partai],
+            borderColor: partaiColors[partai],
+            borderWidth: 1
+        }));
+    
+        // Membuat grafik
+        const ctx = document.getElementById('stackedBarChart').getContext('2d');
+        const stackedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                },
+                scales: {
+                    x: {
+                        stacked: true // Mengaktifkan stack pada sumbu X
+                    },
+                    y: {
+                        stacked: true, // Mengaktifkan stack pada sumbu Y
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+  </div>
+  <div class="container mx-auto mt-6 bg-white p-4 shadow rounded">
+    <h2 class="text-lg font-semibold mb-4">Data Tabel</h2>
+    <div class="overflow-y-auto h-80 border rounded"> <!-- Kontainer dengan scroll -->
+      <table class="table-auto w-full border">
+        <thead class="bg-white-200">
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">No </td>
+        <td class="px-4 py-2 border border-gray-300">Kecamatan</td>
+        <td class="px-4 py-2 border border-gray-300">Putri Dakka, S.H -Drs. H. Haidir Basir, M.M</td>
+        <td class="px-4 py-2 border border-gray-300">Dr. H. Farid Kasim - Dr. Hj. Nurhaenih, M.Si</td>
+        <td class="px-4 py-2 border border-gray-300">Ir. H. Rahmat Masri Bandaso, M.Si - Hj. Andi Tenri Karta, S.AN</td>
+        <td class="px-4 py-2 border border-gray-300">Trisal Tahir - Dr. Akhmad Syarifuddin, S.E., M.Si</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">1</td>
+        <td class="px-4 py-2 border border-gray-300">WARA UTARA</td>
+        <td class="px-4 py-2 border border-gray-300">798</td>
+        <td class="px-4 py-2 border border-gray-300">3,490</td>
+        <td class="px-4 py-2 border border-gray-300">2,478</td>
+        <td class="px-4 py-2 border border-gray-300">3,742</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">2</td>
+        <td class="px-4 py-2 border border-gray-300">WARA TIMUR</td>
+        <td class="px-4 py-2 border border-gray-300">1,967</td>
+        <td class="px-4 py-2 border border-gray-300">6,781</td>
+        <td class="px-4 py-2 border border-gray-300">3,824</td>
+        <td class="px-4 py-2 border border-gray-300">7,557</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">3</td>
+        <td class="px-4 py-2 border border-gray-300">WARA SELATAN</td>
+        <td class="px-4 py-2 border border-gray-300">636</td>
+        <td class="px-4 py-2 border border-gray-300">3,782</td>
+        <td class="px-4 py-2 border border-gray-300">2,020</td>
+        <td class="px-4 py-2 border border-gray-300">3,431</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">4</td>
+        <td class="px-4 py-2 border border-gray-300">WARA BARAT</td>
+        <td class="px-4 py-2 border border-gray-300">621</td>
+        <td class="px-4 py-2 border border-gray-300">2,333</td>
+        <td class="px-4 py-2 border border-gray-300">1,304</td>
+        <td class="px-4 py-2 border border-gray-300">1,786</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">5</td>
+        <td class="px-4 py-2 border border-gray-300">WARA</td>
+        <td class="px-4 py-2 border border-gray-300">1,407</td>
+        <td class="px-4 py-2 border border-gray-300">5,350</td>
+        <td class="px-4 py-2 border border-gray-300">3,949</td>
+        <td class="px-4 py-2 border border-gray-300">3,832</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">6</td>
+        <td class="px-4 py-2 border border-gray-300">TELLUWANUA</td>
+        <td class="px-4 py-2 border border-gray-300">984</td>
+        <td class="px-4 py-2 border border-gray-300">2,950</td>
+        <td class="px-4 py-2 border border-gray-300">977</td>
+        <td class="px-4 py-2 border border-gray-300">3,582</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">7</td>
+        <td class="px-4 py-2 border border-gray-300">SENDANA</td>
+        <td class="px-4 py-2 border border-gray-300">338</td>
+        <td class="px-4 py-2 border border-gray-300">1,697</td>
+        <td class="px-4 py-2 border border-gray-300">693</td>
+        <td class="px-4 py-2 border border-gray-300">1,615</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">8</td>
+        <td class="px-4 py-2 border border-gray-300">MUNGKAJANG</td>
+        <td class="px-4 py-2 border border-gray-300">259</td>
+        <td class="px-4 py-2 border border-gray-300">1,575</td>
+        <td class="px-4 py-2 border border-gray-300">1,459</td>
+        <td class="px-4 py-2 border border-gray-300">2,052</td>
+    </tr>
+    <tr>
+        <td class="px-4 py-2 border border-gray-300">9</td>
+        <td class="px-4 py-2 border border-gray-300">BARA</td>
+        <td class="px-4 py-2 border border-gray-300">989</td>
+        <td class="px-4 py-2 border border-gray-300">5,380</td>
+        <td class="px-4 py-2 border border-gray-300">2,780</td>
+        <td class="px-4 py-2 border border-gray-300">6,336</td>
+    </tr>
+</table>
+</body>
+</html>
